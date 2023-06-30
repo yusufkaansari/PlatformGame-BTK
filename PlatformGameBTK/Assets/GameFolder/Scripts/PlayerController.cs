@@ -9,8 +9,19 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     float moveSpeed = 1f;
+    [SerializeField]
+    float jumpSpeed = 1f, jumpFrequency = 1f, nextJumpTime;
 
     bool facingRight = true;
+
+    bool isGrounded = false;
+    [SerializeField]
+    Transform groundCheckPosition;
+    [SerializeField]
+    float groundCheckRadius;
+    [SerializeField]
+    LayerMask groundCheckLayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +33,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HorizontalMove();
+        OnGroundCheck();
 
         if (playerRB.velocity.x < 0 && facingRight)
         {
@@ -30,6 +42,11 @@ public class PlayerController : MonoBehaviour
         else if (playerRB.velocity.x > 0 && !facingRight)
         {
             FlipFace();
+        }
+        if (Input.GetAxis("Vertical") > 0 && isGrounded && (nextJumpTime < Time.timeSinceLevelLoad))
+        {
+            nextJumpTime = Time.timeSinceLevelLoad + jumpFrequency;
+            Jump();
         }
     }
 
@@ -44,5 +61,14 @@ public class PlayerController : MonoBehaviour
         Vector3 tempLocalScale = transform.localScale;
         tempLocalScale.x *= -1;
         transform.localScale = tempLocalScale;
+    }
+    void Jump()
+    {
+        playerRB.AddForce(new Vector2(0f, jumpSpeed));
+    }
+    void OnGroundCheck()
+    {
+        isGrounded= Physics2D.OverlapCircle(groundCheckPosition.position, groundCheckRadius, groundCheckLayer);
+        playerAnimator.SetBool("isGroundedAnim", isGrounded);
     }
 }
