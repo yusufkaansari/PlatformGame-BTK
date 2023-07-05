@@ -13,14 +13,16 @@ public class PlayerController : MonoBehaviour
     float jumpSpeed = 1f, jumpFrequency = 1f, nextJumpTime;
 
     bool facingRight = true;
-
-    bool isGrounded = false;
+    [SerializeField]
+    bool isGrounded = false, isOnBullet = false;
     [SerializeField]
     Transform groundCheckPosition;
     [SerializeField]
-    float groundCheckRadius;
+    float groundCheckRadius, bulletCheckRadius;
     [SerializeField]
-    LayerMask groundCheckLayer;
+    LayerMask groundCheckLayer, bulletCheckLayer;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         HorizontalMove();
         OnGroundCheck();
+        OnBulletCheck();
 
         if (playerRB.velocity.x < 0 && facingRight)
         {
@@ -44,6 +47,11 @@ public class PlayerController : MonoBehaviour
             FlipFace();
         }
         if (Input.GetAxis("Vertical") > 0 && isGrounded && (nextJumpTime < Time.timeSinceLevelLoad))
+        {
+            nextJumpTime = Time.timeSinceLevelLoad + jumpFrequency;
+            Jump();
+        }
+        if (Input.GetAxis("Vertical") > 0 && isOnBullet && (nextJumpTime < Time.timeSinceLevelLoad))
         {
             nextJumpTime = Time.timeSinceLevelLoad + jumpFrequency;
             Jump();
@@ -68,7 +76,11 @@ public class PlayerController : MonoBehaviour
     }
     void OnGroundCheck()
     {
-        isGrounded= Physics2D.OverlapCircle(groundCheckPosition.position, groundCheckRadius, groundCheckLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheckPosition.position, groundCheckRadius, groundCheckLayer);
         playerAnimator.SetBool("isGroundedAnim", isGrounded);
+    }
+    void OnBulletCheck()
+    {
+        isOnBullet = Physics2D.OverlapCircle(groundCheckPosition.position, bulletCheckRadius, bulletCheckLayer);
     }
 }
