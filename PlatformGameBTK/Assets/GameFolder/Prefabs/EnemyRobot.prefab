@@ -226,6 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   damage: 10
+  slider: {fileID: 289223759483363756}
 --- !u!61 &7371583609038683934
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -366,3 +367,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6472127811640667350, guid: 76d13fa54833d7e47a1fd584c59c35d4, type: 3}
   m_PrefabInstance: {fileID: 6300749439207699132}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &289223759483363756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6013226074994676496, guid: 76d13fa54833d7e47a1fd584c59c35d4, type: 3}
+  m_PrefabInstance: {fileID: 6300749439207699132}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
