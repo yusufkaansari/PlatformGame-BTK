@@ -8,8 +8,6 @@ public class PlayerManager : MonoBehaviour
 {
     public float health, bulletSpeed;
 
-    bool dead = false;
-
     Transform muzzle;
 
     public Transform bullet, floatText, bloodParticle;
@@ -58,7 +56,6 @@ public class PlayerManager : MonoBehaviour
         {
             Destroy(Instantiate(bloodParticle, transform.position, Quaternion.identity),3);
             DataManager.Instance.LoseProcess();
-            dead = true;
             Destroy(gameObject);
         }
     }
@@ -67,8 +64,10 @@ public class PlayerManager : MonoBehaviour
     {
         Transform tempBullet;
         tempBullet= Instantiate(bullet, muzzle.position, Quaternion.identity);
-        tempBullet.GetComponent<Rigidbody2D>().AddForce(muzzle.forward * bulletSpeed);
-        //forward ile Z ekseni üzerinden hareket ettirilir. Bu yüzden trasform bileþenindeki Y deðerini 90 derece ayarlanýr.
+        tempBullet.GetComponent<Rigidbody2D>().AddForce(muzzle.right * bulletSpeed);
+        //muzzle.forward ile Z ekseni (Blue axis) üzerinden hareket ettirilir. Bu yüzden trasform bileþenindeki Y deðerini 90 derece ayarlanýr.
+        //muzzle.right ile X ekseni (Red axis)
+        //muzzle.up ile X ekseni (Green axis)
 
         DataManager.Instance.ShotBullet++;
     }

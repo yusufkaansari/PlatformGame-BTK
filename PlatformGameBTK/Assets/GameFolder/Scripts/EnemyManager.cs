@@ -26,7 +26,7 @@ public class EnemyManager : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // collision yerine "other" degiskeni ismi
+        // collision yerine "other" degisken ismi
         if (other.CompareTag("Player") && !colliderBusy)
         {
             colliderBusy = true;
