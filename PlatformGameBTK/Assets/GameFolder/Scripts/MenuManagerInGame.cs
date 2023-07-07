@@ -46,6 +46,7 @@ public class MenuManagerInGame : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+        DataManager.Instance.SaveData();
         SceneManager.LoadScene("Menu");
     }
 }

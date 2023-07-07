@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class PlayerManager : MonoBehaviour
 
     public Slider slider;
 
+    bool mouseIsNotOverUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,9 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        mouseIsNotOverUI = EventSystem.current.currentSelectedGameObject == null;
+        // Mousenýn UI elemanlarýna týlanýp týklanmadýðýný kontrol ediyor, UI elemanýna týklanmýyorsa null ise true döndürür.
+        if (Input.GetMouseButtonDown(0) && mouseIsNotOverUI)
         {
             ShootBullet();
         }
@@ -62,5 +66,7 @@ public class PlayerManager : MonoBehaviour
         tempBullet= Instantiate(bullet, muzzle.position, Quaternion.identity);
         tempBullet.GetComponent<Rigidbody2D>().AddForce(muzzle.forward * bulletSpeed);
         //forward ile Z ekseni üzerinden hareket ettirilir. Bu yüzden trasform bileþenindeki Y deðerini 90 derece ayarlanýr.
+
+        DataManager.Instance.ShotBullet++;
     }
 }
