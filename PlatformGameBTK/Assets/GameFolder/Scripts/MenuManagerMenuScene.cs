@@ -36,4 +36,8 @@ public class MenuManagerMenuScene : MonoBehaviour
     {
         dataBoard.SetActive(false);
     }
+    public void ExitButton()
+    {
+        Application.Quit();
+    }
 }

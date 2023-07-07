@@ -23,6 +23,10 @@ public class CameraManager : MonoBehaviour
     }
     void SmoothCamera()
     {
-        transform.position = Vector3.Slerp(transform.position, new Vector3(target.position.x + offsetX, target.position.y + offsetY, transform.position.z), cameraSpeed);
+        if (target != null)
+        {
+            transform.position = Vector3.Slerp(transform.position, new Vector3(target.position.x + offsetX, target.position.y + offsetY, transform.position.z), cameraSpeed);
+        }
+        
     }
 }

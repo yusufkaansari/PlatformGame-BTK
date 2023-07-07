@@ -62,6 +62,7 @@ public class DataManager : MonoBehaviour
             if (GameObject.Find("EnemyKilledText") != null)
             {
                 GameObject.Find("EnemyKilledText").GetComponent<Text>().text = "KILLED ENEMY : " + enemyKilled.ToString();
+                WinProcess();
             }
         }
     }
@@ -89,5 +90,17 @@ public class DataManager : MonoBehaviour
             totalShotBullet = myFile.GetInt("totalShotBullet");
             totalEnemyKilled = myFile.GetInt("totalEnemyKilled");
         }
+    }
+
+    public void WinProcess()
+    {
+        if (enemyKilled >= 5)
+        {
+            print("Kazandýnýz !!");
+        }
+    }
+    public void LoseProcess()
+    {
+        print("Kaybettiniz :(");
     }
 }
