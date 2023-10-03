@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     LayerMask groundCheckLayer, bulletCheckLayer;
 
-    [SerializeField]
     AudioSource jumpSound;
 
 

@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour
     public Slider slider;
 
     AudioSource dieSound;
+    bool Isdie = false;
 
     [SerializeField]
     Transform firstPos, secondPos;
@@ -79,12 +80,12 @@ public class EnemyManager : MonoBehaviour
 
     void AmIDead()
     {
-        if (health <= 0)
+        if (health <= 0 && !Isdie)
         {
+            Isdie = true;
             dieSound.Play();
             DataManager.Instance.EnemyKilled++;
-            Destroy(gameObject,0.333f);
-            
+            Destroy(gameObject,0.333f);            
         }
     }
     private void OnDrawGizmos()

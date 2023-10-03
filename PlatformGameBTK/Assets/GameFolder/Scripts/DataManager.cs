@@ -83,6 +83,13 @@ public class DataManager : MonoBehaviour
 
         myFile.Save();
     }
+    void ResetAllData()
+    {
+        myFile.Add("totalShotBullet", 0);
+        myFile.Add("totalEnemyKilled", 0);
+
+        myFile.Save();
+    }
 
     public void LoadData()
     {
@@ -97,6 +104,8 @@ public class DataManager : MonoBehaviour
     {
         if (enemyKilled >= 5)
         {
+            SaveData();
+            ResetScore();
             SceneManager.LoadScene("Win");
             //print("Kazandýnýz !!");
         }
@@ -110,13 +119,14 @@ public class DataManager : MonoBehaviour
 
     // 1 saniye bekle
     yield return new WaitForSeconds(1f);
-
-    SceneManager.LoadScene("GameOver");
-    //print("Kaybettiniz :(");
+        SaveData();
+        ResetScore();
+        SceneManager.LoadScene("GameOver");
 
     }
-    public void PrintScore()
-    {
-
+    public void ResetScore()
+    {       
+        shotBullet = 0;
+        enemyKilled = 0;
     }
 }

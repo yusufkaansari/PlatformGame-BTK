@@ -37,6 +37,8 @@ public class MenuManagerInGame : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+        DataManager.Instance.SaveData();
+        DataManager.Instance.ResetScore();
         SceneManager.LoadScene("Game");
     }
 
@@ -46,7 +48,9 @@ public class MenuManagerInGame : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+
         DataManager.Instance.SaveData();
+        DataManager.Instance.ResetScore();
         SceneManager.LoadScene("Menu");
     }
 }
