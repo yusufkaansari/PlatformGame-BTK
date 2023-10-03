@@ -10,17 +10,35 @@ public class EnemyManager : MonoBehaviour
     bool colliderBusy = false;
 
     public Slider slider;
+
+    AudioSource dieSound;
+
+    [SerializeField]
+    Transform firstPos, secondPos;
+    public float speed;
+    Vector3 nextPos;
+
     // Start is called before the first frame update
     void Start()
     {
         slider.maxValue = health;
         slider.value = health;
+
+        dieSound = GetComponent<AudioSource>();
+
+        nextPos = firstPos.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (transform.position == firstPos.position)
+            nextPos = secondPos.position;
+        if (transform.position == firstPos.position)
+            nextPos = secondPos.position;
+        if (transform.position == secondPos.position)
+            nextPos = firstPos.position;
+        transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
     }
 
     
@@ -63,8 +81,14 @@ public class EnemyManager : MonoBehaviour
     {
         if (health <= 0)
         {
+            dieSound.Play();
             DataManager.Instance.EnemyKilled++;
-            Destroy(gameObject);
+            Destroy(gameObject,0.333f);
+            
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(firstPos.position, secondPos.position);
     }
 }

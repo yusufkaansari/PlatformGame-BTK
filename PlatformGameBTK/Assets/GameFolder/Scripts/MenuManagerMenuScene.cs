@@ -27,10 +27,13 @@ public class MenuManagerMenuScene : MonoBehaviour
     public void DataBoardButton()
     {
         DataManager.Instance.LoadData();
-
-        dataBoard.transform.GetChild(1).GetComponent<Text>().text = "TOTAL BULLET SHOT: " + DataManager.Instance.totalShotBullet.ToString();
-        dataBoard.transform.GetChild(2).GetComponent<Text>().text = "TOTAL ENEMY KÝLLED: " + DataManager.Instance.totalEnemyKilled.ToString();
-        dataBoard.SetActive(true);
+        if (dataBoard != null)
+        {
+            dataBoard.transform.GetChild(1).GetComponent<Text>().text = "TOTAL BULLET SHOT: " + DataManager.Instance.totalShotBullet.ToString();
+            dataBoard.transform.GetChild(2).GetComponent<Text>().text = "TOTAL ENEMY KÝLLED: " + DataManager.Instance.totalEnemyKilled.ToString();
+            dataBoard.SetActive(true);
+        }
+        
     }
     public void XButton()
     {
@@ -39,5 +42,9 @@ public class MenuManagerMenuScene : MonoBehaviour
     public void ExitButton()
     {
         Application.Quit();
+    }
+    public void MenuButton()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

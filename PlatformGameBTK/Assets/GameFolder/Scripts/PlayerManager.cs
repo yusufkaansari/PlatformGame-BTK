@@ -54,7 +54,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (health <= 0)
         {
-            Destroy(Instantiate(bloodParticle, transform.position, Quaternion.identity),3);
+            Transform particle= Instantiate(bloodParticle, transform.position, Quaternion.identity);
+            Destroy(particle.gameObject,3);
             DataManager.Instance.LoseProcess();
             Destroy(gameObject);
         }
@@ -64,7 +65,7 @@ public class PlayerManager : MonoBehaviour
     {
         Transform tempBullet;
         tempBullet= Instantiate(bullet, muzzle.position, Quaternion.identity);
-        tempBullet.GetComponent<Rigidbody2D>().AddForce(muzzle.right * bulletSpeed);
+        tempBullet.GetComponent<Rigidbody2D>().AddForce(muzzle.forward * bulletSpeed);
         //muzzle.forward ile Z ekseni (Blue axis) üzerinden hareket ettirilir. Bu yüzden trasform bileþenindeki Y deðerini 90 derece ayarlanýr.
         //muzzle.right ile X ekseni (Red axis)
         //muzzle.up ile X ekseni (Green axis)

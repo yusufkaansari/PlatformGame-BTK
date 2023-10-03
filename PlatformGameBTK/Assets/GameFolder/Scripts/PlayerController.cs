@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     LayerMask groundCheckLayer, bulletCheckLayer;
 
+    [SerializeField]
+    AudioSource jumpSound;
+
 
 
     // Start is called before the first frame update
@@ -29,6 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+        jumpSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -73,6 +77,8 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         playerRB.AddForce(new Vector2(0f, jumpSpeed));
+        jumpSound.Play();
+
     }
     void OnGroundCheck()
     {

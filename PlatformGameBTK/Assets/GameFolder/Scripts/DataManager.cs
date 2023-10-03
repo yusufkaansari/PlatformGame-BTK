@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TigerForge;
+using UnityEngine.SceneManagement;
 
 public class DataManager : MonoBehaviour
 {
@@ -96,11 +97,26 @@ public class DataManager : MonoBehaviour
     {
         if (enemyKilled >= 5)
         {
-            print("Kazandýnýz !!");
+            SceneManager.LoadScene("Win");
+            //print("Kazandýnýz !!");
         }
     }
     public void LoseProcess()
     {
-        print("Kaybettiniz :(");
+        StartCoroutine(LoseProcessCo());
+    }
+    IEnumerator LoseProcessCo()
+    {
+
+    // 1 saniye bekle
+    yield return new WaitForSeconds(1f);
+
+    SceneManager.LoadScene("GameOver");
+    //print("Kaybettiniz :(");
+
+    }
+    public void PrintScore()
+    {
+
     }
 }
